@@ -1,39 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VideoGameBunny</title>
+    <title>VideoGameBunny: Towards vision assistants for video games</title>
+    <link rel="stylesheet" href="./static/css/prismer.css">
+    <link rel="stylesheet" href="./static/css/shikun.css">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+        .container.blog#first-content {
+            background-color: #E2a3a3;
         }
-        .container {
+
+        footer {
             text-align: center;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            background-color: #f0f0f0;
+            margin-top: 20px;
         }
-        h1 {
-            color: #333;
+
+        footer a {
+            color: #E2a3a3;
         }
-        p {
-            color: #666;
-            font-size: 1.2rem;
+
+        .videogamebunny {
+            color: #696969;
+            font-family: sans-serif;
+            font-variant: small-caps;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .abstract {
+            text-align: justify;
+            margin-bottom: 1em;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        h2 {
+            color: #4a4a4a;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .abstract {
+            text-align: justify;
+            margin-bottom: 1em;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+
+        .code-link {
+            margin-bottom: 2em;
+        }
+
+        h2 {
+            color: #4a4a4a;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .abstract a,
+        .code-link a {
+            color: #E2a3a3;
+            text-decoration: none;
+        }
+
+        .abstract a:hover,
+        .code-link a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>VideoGameBunny</h1>
-        <p>Under Construction</p>
+    <div class="container blog" id="first-content">
+        <div class="blog-title">
+            <div class="blog-intro">
+                <div>
+                    <h1 class="title"><span class="videogamebunny">VideoGameBunny</span>: Towards vision assistants for
+                        video games</h1>
+                    <p class="author">Anonymous Author</p>
+                    <p class="summary">
+                        We introduce <span class="videogamebunny">VideoGameBunny</span>, a LLaVA-style model
+                        designed specifically
+                        for understanding video game images. We present a comprehensive dataset of game images and
+                        instruction pairs, demonstrating that our model can outperform larger state-of-the-art models in
+                        game-related tasks, paving the way for
+                        advanced AI assistants in video game understanding, playing, commentary, and debugging.
+                    </p>
+
+                    <div>
+                        <a href="#" class="button icon" style="background-color: rgba(39, 38, 42, 0.2)">Paper <i
+                                class="far fa-book-open"></i></a>
+                        <a href="https://huggingface.co/datasets/VideoGameBunny/Dataset" class="button icon"
+                            style="background-color: rgba(39, 38, 42, 0.2)">Dataset <i class="far fa-code"></i></a>
+                        <a href="https://huggingface.co/VideoGameBunny/VideoGameBunny-V1" class="button icon"
+                            style="background-color: rgba(39, 38, 42, 0.2)">Model <i
+                                class="fa-light fa-face-smiling-hands"></i></a>
+                    </div>
+                </div>
+                <div class="info">
+                    <p>Paper Under Review</p>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="container blog main first" id="blog-main">
+        <h1 class="section">
+            Abstract
+        </h1>
+        <p class="abstract">
+            Large multimodal models (LMMs) hold substantial promise across various domains, from personal assistance in
+            daily
+            tasks to sophisticated applications like medical diagnostics. However, their capabilities have limitations
+            in the
+            video game domain, such as challenges with scene understanding, hallucinations, and inaccurate descriptions
+            of video
+            game content, especially in open-source models. This paper describes the development of <span
+                class="videogamebunny">VideoGameBunny</span>, a LLaVA-style model based on Bunny, specifically tailored
+            for
+            understanding images from video games. We release intermediate checkpoints, training logs, and an extensive
+            dataset
+            comprising 185,259 video game images from 413 titles, along with 389,565 image-instruction pairs that
+            include image
+            captions, question-answer pairs, and a JSON representation of 16 elements of 136,974 images. Our experiments
+            show
+            that our high quality game-related data has the potential to make a relatively small model outperform the
+            much
+            larger state-of-the-art model LLaVa-1.6-34b (which has more than 4x the number of parameters). Our study
+            paves the
+            way for future research in video game understanding on tasks such as playing, commentary, and debugging.
+        </p>
+
+    </div>
+
+
+
+    <footer>
+        <p>This website is using the template of <a href="https://shikun.io/projects/prismer">Prismer</a></p>
+    </footer>
+
 </body>
+
 </html>
