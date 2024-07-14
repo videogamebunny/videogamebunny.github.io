@@ -72,6 +72,54 @@
         .code-link a:hover {
             text-decoration: underline;
         }
+
+
+        #annotation-text-container {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        #annotation-text-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .annotation-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .annotation-point:hover {
+            background-color: rgba(0, 123, 255, 0.5);
+        }
+
+        .annotation-text {
+            margin-top: 1rem;
+            font-size: inherit;
+            font-family: inherit;
+            line-height: inherit;
+            color: inherit;
+            display: none;
+        }
     </style>
 </head>
 
@@ -91,7 +139,6 @@
                         game-related tasks, paving the way for
                         advanced AI assistants in video game understanding, playing, commentary, and debugging.
                     </p>
-
                     <div>
                         <a href="#" class="button icon" style="background-color: rgba(39, 38, 42, 0.2)">Paper <i
                                 class="far fa-book-open"></i></a>
@@ -106,8 +153,14 @@
                     <p>Paper Under Review</p>
                 </div>
             </div>
+
+            <div class="blog-cover">
+                <img class="foreground" src="./static/images/banner.png" alt="VIDEOGAMEBUNNY banner">
+                <img class="background" src="./static/images/banner.png" alt="VIDEOGAMEBUNNY banner background">
+            </div>
         </div>
     </div>
+
 
     <div class="container blog main first" id="blog-main">
         <h1 class="section">
@@ -139,10 +192,65 @@
     </div>
 
 
+    <div class="container blog main second" id="blog-main">
+        <h1 class="section">
+            Sample
+        </h1>
+        <p>
+            Below is a sample annotated image in the image-to-JSON subset of our dataset, containing a detailed summary
+            of the
+            image, from a high-level description to details about the surroundings, player inventory, and watermark on
+            the image.
+        </p>
+
+        <p class="note" style="margin-top: 1em; margin-bottom: 1em; font-style: italic;">
+            Note: Click on the circles in the image to view detailed annotations.
+        </p>
+
+
+        <div class="image-container">
+            <img src="./static/images/ee213477-cb0c-4897-92c4-96c273aceb40.jpeg" alt="VideoGameBunny Cover">
+            <div class="annotation-point" style="top: 80%; left: 85%;"
+                data-text="The player has 30 rounds in the currently equipped magazine, 42 spare rounds, 1 grenade, and 4 of an unidentified item.">
+            </div>
+            <div class="annotation-point" style="top: 40%; left: 40%;"
+                data-text="A set of double doors, secured by a chain and padlock"></div>
+            <div class="annotation-point" style="top: 30%; left: 75%;"
+                data-text="A whimsically painted mural on the right wall, depicting a panda bear and a monkey playfully engaged in a soccer match.">
+            </div>
+            <div class="annotation-point" style="top: 40%; left: 15%;"
+                data-text="Two armed soldiers, clad in military fatigues, are positioned strategically within a room.">
+            </div>
+            <div class="annotation-point" style="top: 3%; left: 90%;" data-text="Watermark: Gamer's Little Playground">
+            </div>
+            <div class="annotation-point" style="top: 15%; left: 50%;"
+                data-text="The room is dimly lit with the primary light source appearing to be a fluorescent light fixture on the ceiling.">
+            </div>
+        </div>
+        <div id="annotation-text-container"></div>
+
+
+    </div>
+
 
     <footer>
-        <p>This website is using the template of <a href="https://shikun.io/projects/prismer">Prismer</a></p>
+        <p>This website is using the template of <a href="https://shikun.io/projects/prismer">Prismer</a> by Shikun
+            Liu.</p>
     </footer>
+
+
+    <script>
+        const textContainer = document.getElementById('annotation-text-container');
+        document.querySelectorAll('.annotation-point').forEach(point => {
+            point.addEventListener('click', function () {
+                const text = this.getAttribute('data-text');
+                textContainer.textContent = text;
+                textContainer.classList.remove('show');
+                void textContainer.offsetWidth; // Trigger reflow
+                textContainer.classList.add('show');
+            });
+        });
+    </script>
 
 </body>
 
