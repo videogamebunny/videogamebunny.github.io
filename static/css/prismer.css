@@ -1,114 +1,92 @@
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 @font-face {
-  font-family: "Tiempos Text";
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Bold.eot");
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Bold.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Bold.woff") format("woff"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Bold.ttf") format("truetype");
+  font-family: "Lora";
+  src: url("https://fonts.gstatic.com/s/lora/v32/0QI6MX1D_JOuGQbT0gvTJPa787weuxJBkqt8ndeY9Z6JTg.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
 }
+
 @font-face {
-  font-family: "Tiempos Text";
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-BoldItalic.eot");
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-BoldItalic.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-BoldItalic.woff") format("woff"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-BoldItalic.ttf") format("truetype");
+  font-family: "Lora";
+  src: url("https://fonts.gstatic.com/s/lora/v32/0QI8MX1D_JOuMw_hLdO6T2wV9KnW-MoFoq92mvWc3ZyRTQ.woff2") format("woff2");
   font-weight: 700;
   font-style: italic;
 }
+
 @font-face {
-  font-family: "Tiempos Text";
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Semibold.eot");
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Semibold.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Semibold.woff") format("woff"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Semibold.ttf") format("truetype");
+  font-family: "Lora";
+  src: url("https://fonts.gstatic.com/s/lora/v32/0QI6MX1D_JOuGQbT0gvTJPa787zAvBJBkqt8ndeY9Z6JTg.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
 }
+
 @font-face {
-  font-family: "Tiempos Text";
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-SemiboldItalic.eot");
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-SemiboldItalic.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-SemiboldItalic.woff") format("woff"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-SemiboldItalic.ttf") format("truetype");
+  font-family: "Lora";
+  src: url("https://fonts.gstatic.com/s/lora/v32/0QI8MX1D_JOuMw_hLdO6T2wV9KnW-PgFoq92mvWc3ZyRTQ.woff2") format("woff2");
   font-weight: 600;
   font-style: italic;
 }
+
 @font-face {
-  font-family: "Tiempos Text";
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Regular.eot");
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Regular.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Regular.woff") format("woff"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Regular.ttf") format("truetype");
+  font-family: "Lora";
+  src: url("https://fonts.gstatic.com/s/lora/v32/0QI6MX1D_JOuGQbT0gvTJPa787weuxJBkqt8ndeY9Z6JTg.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
 }
+
 @font-face {
-  font-family: "Tiempos Text";
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Italic.eot");
-  src: url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Italic.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Italic.woff") format("woff"), url("https://shikun.io/assets/fonts/Tiempos/TiemposText-Italic.ttf") format("truetype");
+  font-family: "Lora";
+  src: url("https://fonts.gstatic.com/s/lora/v32/0QI8MX1D_JOuMw_hLdO6T2wV9KnW-MoFoq92mvWc3ZyRTQ.woff2") format("woff2");
   font-weight: 500;
   font-style: italic;
 }
+
 @font-face {
-  font-family: "Athletics";
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-Bold.eot");
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-Bold.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Bold.woff2") format("woff2"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Bold.woff") format("woff"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Bold.ttf") format("truetype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Bold.svg#Athletics-Bold") format("svg");
+  font-family: "Montserrat";
+  src: url("https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXp-p7K4KLg.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: "Athletics";
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-BoldItalic.eot");
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-BoldItalic.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-BoldItalic.woff2") format("woff2"), url("https://shikun.io/assets/fonts/Athletics/Athletics-BoldItalic.woff") format("woff"), url("https://shikun.io/assets/fonts/Athletics/Athletics-BoldItalic.ttf") format("truetype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-BoldItalic.svg#Athletics-BoldItalic") format("svg");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Athletics";
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-Medium.eot");
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-Medium.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Medium.woff2") format("woff2"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Medium.woff") format("woff"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Medium.ttf") format("truetype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Medium.svg#Athletics-Medium") format("svg");
+  font-family: "Montserrat";
+  src: url("https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw3aXp-p7K4KLg.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: "Athletics";
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-MediumItalic.eot");
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-MediumItalic.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-MediumItalic.woff2") format("woff2"), url("https://shikun.io/assets/fonts/Athletics/Athletics-MediumItalic.woff") format("woff"), url("https://shikun.io/assets/fonts/Athletics/Athletics-MediumItalic.ttf") format("truetype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-MediumItalic.svg#Athletics-MediumItalic") format("svg");
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Athletics";
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-Italic.eot");
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-Italic.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Italic.woff2") format("woff2"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Italic.woff") format("woff"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Italic.ttf") format("truetype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Italic.svg#Athletics-Italic") format("svg");
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Athletics";
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-Regular.eot");
-  src: url("https://shikun.io/assets/fonts/Athletics/Athletics-Regular.eot?#iefix") format("embedded-opentype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Regular.woff2") format("woff2"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Regular.woff") format("woff"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Regular.ttf") format("truetype"), url("https://shikun.io/assets/fonts/Athletics/Athletics-Regular.svg#Athletics-Regular") format("svg");
+  font-family: "Montserrat";
+  src: url("https://fonts.gstatic.com/s/montserrat/v25/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtZ6Hw5aXp-p7K4KLg.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
+
 div.zero-shot {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   -moz-column-gap: 1.5vw;
-       column-gap: 1.5vw;
+  column-gap: 1.5vw;
 }
 
 div.property {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   -moz-column-gap: 2vw;
-       column-gap: 2vw;
+  column-gap: 2vw;
 }
 
 div.imagenet {
   display: grid;
   grid-template-columns: 1fr 1fr;
   -moz-column-gap: 2vw;
-       column-gap: 2vw;
+  column-gap: 2vw;
 }
+
 div.imagenet div {
   padding: 1.5vh 0;
 }
@@ -117,9 +95,10 @@ div.label {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   -moz-column-gap: 1vw;
-       column-gap: 1vw;
+  column-gap: 1vw;
   row-gap: 5px;
 }
+
 div.label img {
   width: 100%;
 }
@@ -128,7 +107,7 @@ div.fine-tuned {
   display: grid;
   grid-template-columns: 1fr 1fr;
   -moz-column-gap: 2vw;
-       column-gap: 2vw;
+  column-gap: 2vw;
 }
 
 div.caption {
@@ -145,6 +124,7 @@ div.caption-1 {
 div.caption-2 {
   display: grid;
 }
+
 div.caption-2 .caption-3 {
   display: flex;
   flex-direction: column;
@@ -156,8 +136,11 @@ div.caption-2 .caption-3 {
     grid-template-columns: 1fr;
     row-gap: 2vh;
   }
+
   div.imagenet {
     display: grid;
     grid-template-columns: 1fr;
   }
-}/*# sourceMappingURL=prismer.css.map */
+}
+
+/*# sourceMappingURL=prismer.css.map */
