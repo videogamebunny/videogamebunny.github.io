@@ -99,6 +99,10 @@
             opacity: 0;
             transform: translateY(-20px);
             transition: opacity 0.3s ease, transform 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            /* Add this line */
+            font-size: 14px;
+            /* Add this line if you want to change the font size */
         }
 
         #annotation-text-container.show {
@@ -135,6 +139,12 @@
             line-height: inherit;
             color: inherit;
             display: none;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
@@ -178,7 +188,7 @@
     </div>
 
 
-    <div class="container blog main first" id="blog-main">
+    <div class="container blog main first " id="blog-main">
         <h1 class="section">
             Abstract
         </h1>
@@ -208,46 +218,744 @@
     </div>
 
 
-    <div class="container blog main second" id="blog-main">
+
+    <div class="container blog main gray">
         <h1 class="section">
-            Sample
+            <span class="videogamebunny">VideoGameBunny</span> Model Architecture
         </h1>
-        <p>
-            Below is a sample annotated image in the image-to-JSON subset of our dataset, containing a detailed summary
-            of the
-            image, from a high-level description to details about the surroundings, player inventory, and watermark on
-            the image.
+
+        <img src="./static/svg/Arch.svg" alt="VideoGameBunny Model Architecture">
+
+        <p class="text">
+            <span class="videogamebunny">VideoGameBunny</span> is based on <a
+                href="https://github.com/BAAI-DCAI/Bunny">Bunny</a>, an efficient and lightweight large multimodal
+            language model.
+        </p>
+    </div>
+
+
+    <div class="container blog main ">
+        <h1 class="section">
+            Dataset
+        </h1>
+
+        <p class="text">
+            We collect a diverse dataset of 185,259 high-resolution images from 413 video games sourced from YouTube
+            videos to
+            address the lack of game-specific instruction-following data. We generate various types of instructions for
+            these images
+            using different large multimodal models: short captions, long captions, image-to-JSON conversions, and
+            image-based
+            question-answering pairs. The image-to-JSON format provides structured, detailed descriptions of game
+            elements, while
+            the question-answering data is generated using both text-based models (LLama-3) and image-based models
+            (GPT-4o), where
+            we feed an image to a model and ask a question about its contents. This comprehensive dataset aims to
+            improve the
+            ability of open-source models to understand and respond to video game content.
         </p>
 
-        <p class="note" style="margin-top: 1em; margin-bottom: 1em; font-style: italic;">
-            Note: Click on the circles in the image to view detailed annotations.
-        </p>
 
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Generator</th>
+                    <th>Samples</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Short Captions</td>
+                    <td>Gemini-1.0-Pro-Vision</td>
+                    <td>70,673</td>
+                </tr>
+                <tr>
+                    <td>Long Captions</td>
+                    <td>GPT-4V</td>
+                    <td>70,799</td>
+                </tr>
+                <tr>
+                    <td>Image-to-JSON</td>
+                    <td>Gemini-1.5-Pro</td>
+                    <td>136,974</td>
+                </tr>
+                <tr>
+                    <td>Question Answering</td>
+                    <td>Llama-3, GPT-4o</td>
+                    <td>81,122</td>
+                </tr>
 
-        <div class="image-container">
-            <img src="./static/images/ee213477-cb0c-4897-92c4-96c273aceb40.jpeg" alt="VideoGameBunny Cover">
-            <div class="annotation-point" style="top: 80%; left: 85%;"
-                data-text="The player has 30 rounds in the currently equipped magazine, 42 spare rounds, 1 grenade, and 4 of an unidentified item.">
-            </div>
-            <div class="annotation-point" style="top: 40%; left: 40%;"
-                data-text="A set of double doors, secured by a chain and padlock"></div>
-            <div class="annotation-point" style="top: 30%; left: 75%;"
-                data-text="A whimsically painted mural on the right wall, depicting a panda bear and a monkey playfully engaged in a soccer match.">
-            </div>
-            <div class="annotation-point" style="top: 40%; left: 15%;"
-                data-text="Two armed soldiers, clad in military fatigues, are positioned strategically within a room.">
-            </div>
-            <div class="annotation-point" style="top: 3%; left: 90%;" data-text="Watermark: Gamer's Little Playground">
-            </div>
-            <div class="annotation-point" style="top: 12%; left: 38%;"
-                data-text="The room is dimly lit with the primary light source appearing to be a fluorescent light fixture on the ceiling.">
-            </div>
-        </div>
-        <div id="annotation-text-container"></div>
+            </tbody>
+        </table>
+
 
 
     </div>
 
+    <div class="container blog main ">
+        <p class="text">
+            We also use Gemini-1.5-Pro to create an evaluation set of 3,375 samples containig multiple choice
+            questions about the images in 10 different categories.
+        </p>
+        <div class="table-wrapper">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Action Understanding</strong></td>
+                        <td>Recognizing and describing the actions taking place within the image.</td>
+                        <td>356</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: What action is the character in the foreground performing?</em></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anomalies and Glitches</strong></td>
+                        <td>Identifying errors, bugs, glitches, or placeholder elements within the game environment.
+                        </td>
+                        <td>223</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: Describe any anomalies or glitches present in the image.</em></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Character Analysis</strong></td>
+                        <td>Recognizing characters, understanding their roles, and interpreting their expressions and
+                            poses.
+                        </td>
+                        <td>312</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: What is Aloy's emotional state based on her facial expression?</em></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Common Sense Reasoning</strong></td>
+                        <td>Understanding the image using general knowledge and everyday logic.</td>
+                        <td>430</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: Based on the score and time remaining, which team is likely to win the
+                                match?</em>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gameplay Mechanics</strong></td>
+                        <td>Understanding the rules and mechanics that govern the game.</td>
+                        <td>273</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: What game mechanic is most likely being utilized by the player character?</em>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>OCR and UI</strong></td>
+                        <td>Reading and interpreting on-screen text and user interface elements.</td>
+                        <td>334</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: What is written in the caption box at the bottom of the image?</em></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Miscellaneous</strong></td>
+                        <td>Any other type of question that does not fit into the previous categories.</td>
+                        <td>239</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: What material are the containers in the image primarily made of?</em></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scene Understanding</strong></td>
+                        <td>Recognizing and interpreting the overall environment or setting in the image.</td>
+                        <td>566</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: The racetrack depicted in the image is set in what type of environment?</em>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Small Details</strong></td>
+                        <td>Identifying and interpreting small but significant details within the image.</td>
+                        <td>356</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: What color is the jacket worn by the character in the foreground?</em></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Spatial Reasoning</strong></td>
+                        <td>Testing the ability to understand spatial relationships of objects present in the image.
+                        </td>
+                        <td>286</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><em>Sample: What is the spatial relationship between the two red markers visible in the
+                                image?</em></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption">Categories of questions in our dataset, along with a sample question for each category.
+            </p>
+        </div>
+
+
+    </div>
+
+
+    <div class="container blog comment main gray ">
+        <div class="content">
+            <div class="image-container">
+                <img src="./static/images/ee213477-cb0c-4897-92c4-96c273aceb40.jpeg" alt="VideoGameBunny Cover">
+                <div class="annotation-point" style="top: 80%; left: 85%;"
+                    data-text="The player has 30 rounds in the currently equipped magazine, 42 spare rounds, 1 grenade, and 4 of an unidentified item.">
+                </div>
+                <div class="annotation-point" style="top: 40%; left: 40%;"
+                    data-text="A set of double doors, secured by a chain and padlock"></div>
+                <div class="annotation-point" style="top: 30%; left: 75%;"
+                    data-text="A whimsically painted mural on the right wall, depicting a panda bear and a monkey playfully engaged in a soccer match.">
+                </div>
+                <div class="annotation-point" style="top: 40%; left: 15%;"
+                    data-text="Two armed soldiers, clad in military fatigues, are positioned strategically within a room.">
+                </div>
+                <div class="annotation-point" style="top: 3%; left: 90%;"
+                    data-text="Watermark: Gamer's Little Playground">
+                </div>
+                <div class="annotation-point" style="top: 12%; left: 38%;"
+                    data-text="The room is dimly lit with the primary light source appearing to be a fluorescent light fixture on the ceiling.">
+                </div>
+            </div>
+            <div id="annotation-text-container"></div>
+        </div>
+        <div class="content-comment">
+            <p class="caption comment">
+                Our dataset contains 389,565 image-instruction pairs that include image captions, question-answer pairs,
+                and a JSON representation of 16 elements of 136,974 images.
+            </p>
+            <p class="caption comment" style="margin-top: 1em; margin-bottom: 1em; font-style: italic;">
+                Note: Click on the circles in the image to view detailed annotations.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="container blog main ">
+        <h1 class="section">
+            Model Training and Results
+        </h1>
+
+        <p class="text">
+            We instruction tune Bunny using image-instruction pairs that contain image captions, image-based
+            question
+            answering, and
+            image-to-JSON conversion.
+        </p>
+
+    </div>
+
+    <div class="container blog main ">
+        <h2 class="section">
+            Which type of data has the potential to improve the model’s performance?
+        </h2>
+
+
+        <p class="text">
+            We investigate which type of data has the potential to improve the model's performance. To do this, we
+            fine-tune the
+            Bunny model using a single dataset at a time, varying the subset size from 2K to 60K samples. We
+            perform this
+            fine-tuning only once for each dataset and subset size combination. Our goal is to observe overall
+            performance trends
+            rather than optimizing for the best performance. We continue increasing the subset size until we observe a
+            sharp decline
+            in performance, at which point we stop the experiment for that particular dataset. This approach allows us
+            to
+            efficiently explore the impact of different data types on the model's performance and identify which
+            datasets are most
+            promising for further investigation.
+        </p>
+
+        <div class="table-wrapper">
+            <table border="1" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th>Dataset</th>
+                        <th style="text-align: center;">2k</th>
+                        <th style="text-align: center;">5k</th>
+                        <th style="text-align: center;">10k</th>
+                        <th style="text-align: center;">20k</th>
+                        <th style="text-align: center;">40k</th>
+                        <th style="text-align: center;">50k</th>
+                        <th style="text-align: center;">60k</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Short Caps.</td>
+                        <td style="color: red; text-align: right;">-0.3</td>
+                        <td style="color: forestgreen; text-align: right;">+0.8</td>
+                        <td style="color: red; text-align: right;">-35.5</td>
+                        <td style="color: red; text-align: right;">-30.0</td>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;"></td>
+                        <td style="text-align: right;"></td>
+                    </tr>
+                    <tr>
+                        <td>Long Caps.</td>
+                        <td style="color: forestgreen; text-align: right;">+3.6</td>
+                        <td style="color: forestgreen; text-align: right;">+3.8</td>
+                        <td style="color: forestgreen; text-align: right;">+4.6</td>
+                        <td style="color: forestgreen; text-align: right;">+6.8</td>
+                        <td style="color: forestgreen; text-align: right;">+6.4</td>
+                        <td style="color: forestgreen; text-align: right;">+6.3</td>
+                        <td style="color: forestgreen; text-align: right;">+4.2</td>
+                    </tr>
+                    <tr>
+                        <td>IM-to-JS</td>
+                        <td style="color: forestgreen; text-align: right;">+3.8</td>
+                        <td style="color: forestgreen; text-align: right;">+5.6</td>
+                        <td style="color: forestgreen; text-align: right;">+7.6</td>
+                        <td style="color: forestgreen; text-align: right;">+8.8</td>
+                        <td style="color: forestgreen; text-align: right;">+9.8</td>
+                        <td style="color: forestgreen; text-align: right;">+8.9</td>
+                        <td style="color: forestgreen; text-align: right;"><strong>+11.7</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Llama-3 QA</td>
+                        <td style="color: forestgreen; text-align: right;">+1.5</td>
+                        <td style="color: forestgreen; text-align: right;">+1.8</td>
+                        <td style="color: forestgreen; text-align: right;">+2.5</td>
+                        <td style="color: forestgreen; text-align: right;">+3.0</td>
+                        <td style="color: forestgreen; text-align: right;">+6.1</td>
+                        <td style="color: forestgreen; text-align: right;">+6.2</td>
+                        <td style="color: forestgreen; text-align: right;">+2.6</td>
+                    </tr>
+                    <tr>
+                        <td>GPT4Q QA</td>
+                        <td style="color: forestgreen; text-align: right;">+4.5</td>
+                        <td style="color: forestgreen; text-align: right;">+7.3</td>
+                        <td style="color: forestgreen; text-align: right;">+6.1</td>
+                        <td style="color: grey; text-align: right;">N/A</td>
+                        <td style="color: grey; text-align: right;">N/A</td>
+                        <td style="color: grey; text-align: right;">N/A</td>
+                        <td style="color: grey; text-align: right;">N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption">Relative performance improvement (pp) of Bunny fine-tuned on different subsets of each
+                dataset. The image-to-JSON
+                dataset shows a strong positive trend, while the short captions dataset degrades performance.
+            </p>
+        </div>
+
+    </div>
+
+    <div class="container blog main ">
+        <h2 class="section">
+            Which type of data has the potential to improve the model's performance?
+        </h2>
+        <p class="text">
+            We explore different data mixing strategies to determine which approach improves the model's performance the
+            most. We
+            evaluate four strategies: Random, Equal, Stratified, and Weighted. The Random strategy involves sampling
+            without
+            replacement from all datasets combined. The Equal strategy selects an equal number of samples from each
+            dataset. The
+            Stratified approach mixes datasets based on video games to ensure a balanced representation of different
+            games. The
+            Weighted strategy prioritizes the three most effective datasets identified in our previous experiment:
+            image-based
+            question-answering (GPT-4o), long captions, and image-to-JSON.
+            We fine-tune the Bunny model on these mixture
+            strategies
+            with dataset sizes ranging from 2K to 30K samples. Each experiment is repeated three times with
+            different samples
+            to report mean performance and standard deviation. We stop at 30K samples due to limitations in our
+            smallest dataset
+            (GPT-4o with 10K samples), which would be exhausted for the Equal and Weighted strategies at this point.
+        </p>
+
+        <div class="table-wrapper">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Size</th>
+                        <th style="text-align: center;">Random</th>
+                        <th style="text-align: center;">Equal</th>
+                        <th style="text-align: center;">Stratified</th>
+                        <th style="text-align: center;">Weighted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="text-align: right;">2K</td>
+                        <td style="text-align: right;">76.7 ± 0.9</td>
+                        <td style="text-align: right;">77.8 ± 0.8</td>
+                        <td style="text-align: right;">78.0 ± 0.2</td>
+                        <td style="text-align: right;">79.0 ± 0.6</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">5K</td>
+                        <td style="text-align: right;">79.2 ± 0.4</td>
+                        <td style="text-align: right;">79.9 ± 0.4</td>
+                        <td style="text-align: right;">80.0 ± 0.5</td>
+                        <td style="text-align: right;">79.8 ± 0.6</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">10K</td>
+                        <td style="text-align: right;">79.8 ± 0.8</td>
+                        <td style="text-align: right;">80.8 ± 0.6</td>
+                        <td style="text-align: right;">80.8 ± 0.1</td>
+                        <td style="text-align: right;">81.4 ± 0.5</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">20K</td>
+                        <td style="text-align: right;">81.5 ± 0.1</td>
+                        <td style="text-align: right;">81.3 ± 0.7</td>
+                        <td style="text-align: right;">81.8 ± 0.8</td>
+                        <td style="text-align: right;">82.3 ± 0.9</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;">30K</td>
+                        <td style="text-align: right;">81.8 ± 0.4</td>
+                        <td style="text-align: right;">81.2 ± 1.1</td>
+                        <td style="text-align: right;">81.6 ± 0.7</td>
+                        <td style="text-align: right;"><strong>82.6 ± 0.3</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <p class="caption">Performance of models fine-tuned on a mixture of data with various strategies. The Weighted
+            strategy leads
+            to better performance with smaller dataset sizes, but as the size increases, both Equal and Weighted
+            strategies
+            perform similarly.
+        </p>
+
+    </div>
+
+    <div class="container blog main ">
+
+        <p class="text">
+            Looking at the average improvement per category reveals that most improvements come from game-related
+            categories
+            (Anomalies and Glitches, and HUD and UI).
+        </p>
+
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category/Dataset Size</th>
+                        <th style="text-align: right;">2k</th>
+                        <th style="text-align: right;">5K</th>
+                        <th style="text-align: right;">10K</th>
+                        <th style="text-align: right;">20K</th>
+                        <th style="text-align: right;">30K</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Action Understanding</td>
+                        <td style="color: forestgreen; text-align: right;">1.6</td>
+                        <td style="color: forestgreen; text-align: right;">2.5</td>
+                        <td style="color: forestgreen; text-align: right;">2.5</td>
+                        <td style="color: forestgreen; text-align: right;">3.7</td>
+                        <td style="color: forestgreen; text-align: right;">3.9</td>
+                    </tr>
+                    <tr>
+                        <td>Anomalies and Glitches</td>
+                        <td style="color: forestgreen; text-align: right;">23.4</td>
+                        <td style="color: forestgreen; text-align: right;">33.0</td>
+                        <td style="color: forestgreen; text-align: right;">33.2</td>
+                        <td style="color: forestgreen; text-align: right;">34.0</td>
+                        <td style="color: forestgreen; text-align: right;">32.0</td>
+                    </tr>
+                    <tr>
+                        <td>Character Analysis</td>
+                        <td style="color: forestgreen; text-align: right;">2.6</td>
+                        <td style="color: forestgreen; text-align: right;">3.9</td>
+                        <td style="color: forestgreen; text-align: right;">4.2</td>
+                        <td style="color: forestgreen; text-align: right;">4.7</td>
+                        <td style="color: forestgreen; text-align: right;">4.4</td>
+                    </tr>
+                    <tr>
+                        <td>Common Sense Reasoning</td>
+                        <td style="color: forestgreen; text-align: right;">3.7</td>
+                        <td style="color: forestgreen; text-align: right;">4.2</td>
+                        <td style="color: forestgreen; text-align: right;">3.8</td>
+                        <td style="color: forestgreen; text-align: right;">4.3</td>
+                        <td style="color: forestgreen; text-align: right;">4.0</td>
+                    </tr>
+                    <tr>
+                        <td>Gameplay Mechanics</td>
+                        <td style="color: forestgreen; text-align: right;">4.2</td>
+                        <td style="color: forestgreen; text-align: right;">5.0</td>
+                        <td style="color: forestgreen; text-align: right;">6.4</td>
+                        <td style="color: forestgreen; text-align: right;">8.2</td>
+                        <td style="color: forestgreen; text-align: right;">8.9</td>
+                    </tr>
+                    <tr>
+                        <td>HUD and UI</td>
+                        <td style="color: forestgreen; text-align: right;">9.3</td>
+                        <td style="color: forestgreen; text-align: right;">12.9</td>
+                        <td style="color: forestgreen; text-align: right;">16.5</td>
+                        <td style="color: forestgreen; text-align: right;">18.9</td>
+                        <td style="color: forestgreen; text-align: right;">21.0</td>
+                    </tr>
+                    <tr>
+                        <td>Miscellaneous</td>
+                        <td style="color: forestgreen; text-align: right;">7.2</td>
+                        <td style="color: forestgreen; text-align: right;">7.9</td>
+                        <td style="color: forestgreen; text-align: right;">9.6</td>
+                        <td style="color: forestgreen; text-align: right;">9.9</td>
+                        <td style="color: forestgreen; text-align: right;">9.8</td>
+                    </tr>
+                    <tr>
+                        <td>Scene Understanding</td>
+                        <td style="color: red; text-align: right;">-0.2</td>
+                        <td style="color: forestgreen; text-align: right;">0.6</td>
+                        <td style="color: forestgreen; text-align: right;">1.3</td>
+                        <td style="color: forestgreen; text-align: right;">2.0</td>
+                        <td style="color: forestgreen; text-align: right;">2.0</td>
+                    </tr>
+                    <tr>
+                        <td>Small Details</td>
+                        <td style="color: forestgreen; text-align: right;">0.3</td>
+                        <td style="color: forestgreen; text-align: right;">1.2</td>
+                        <td style="color: forestgreen; text-align: right;">2.4</td>
+                        <td style="color: forestgreen; text-align: right;">3.4</td>
+                        <td style="color: forestgreen; text-align: right;">3.0</td>
+                    </tr>
+                    <tr>
+                        <td>Spatial Reasoning</td>
+                        <td style="color: forestgreen; text-align: right;">5.3</td>
+                        <td style="color: forestgreen; text-align: right;">6.2</td>
+                        <td style="color: forestgreen; text-align: right;">7.1</td>
+                        <td style="color: forestgreen; text-align: right;">7.8</td>
+                        <td style="color: forestgreen; text-align: right;">7.4</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="caption">Average improvement for different sizes for each category</p>
+        </div>
+
+    </div>
+
+    <div class="container blog main ">
+        <h2 class="section">
+            How does <span class="videogamebunny">VideoGameBunny</span> perform compared to SOTA open-source models on
+            game understanding tasks?
+        </h2>
+
+        <p class="text">
+            We assess the effectiveness of fine-tuning a smaller model on game-specific data by comparing our method to
+            state-of-the-art open-source models. To do this, we fine-tune our model on a dataset of 50K
+            image-instruction samples
+            compiled from all previously introduced datasets. We then evaluate our model's performance against
+            LLaVA-1.6, a
+            state-of-the-art open-source model with 4.2 times more parameters. This comparison allows us to determine
+            how well our
+            approach of fine-tuning a smaller model on game-specific data performs compared to larger, more general
+            models on game
+            understanding tasks.
+        </p>
+
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                        <th></th>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bunny-1.1-Llama-3-8B</td>
+                        <td style="text-align: right;">73.3</td>
+                        <td></td>
+                        <td>LLaVA-v1.5-13b</td>
+                        <td style="text-align: right;">64.6</td>
+                    </tr>
+                    <tr>
+                        <td><span class="videogamebunny">VideoGameBunny</span></td>
+                        <td style="text-align: right;"><strong>85.1</strong></td>
+                        <td></td>
+                        <td>LLaVA-v1.6-vicuna-13b</td>
+                        <td style="text-align: right;">71.7</td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-v1.5-7b</td>
+                        <td style="text-align: right;">61.3</td>
+                        <td></td>
+                        <td>LLaVA-v1.6-34b</td>
+                        <td style="text-align: right;">83.9</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p class="caption">
+            Performance of various models on the evaluation set (%).
+        </p>
+    </div>
+
+    <!-- --------------------- -->
+
+
+    <div class="container blog main gray extra-large">
+        <div class="slide-menu">
+            <ul class="dots" id="slide-menu">
+                <li class="dot active"></li>
+                <li class="dot"></li>
+            </ul>
+        </div>
+
+        <div class="slide-content" style="display: block;">
+            <div class="image-container">
+                <img src="./static/images/sample-A.jpeg" alt="Cyberpunk-style city scene">
+            </div>
+            <hr class="hard">
+            <div>
+                <div class="caption-1">
+                    <div>
+                        <p class="caption inline">
+                            <b style="font-weight: 700; color: darkblue;">Question:</b> <b>Are there any visible
+                                glitches
+                                or errors in the
+                                game
+                                environment?</b>
+                        </p>
+                    </div>
+                </div>
+                <div class="caption-2">
+                    <div>
+                        <p class="caption inline">
+                            <b style="font-weight: 700;">VideoGameBunny:</b> <b style="color: blue;">(D)</b> No, there
+                            are no apparent glitches.
+                            <span style="color: forestgreen;">✓</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="caption inline">
+                            <b style="font-weight: 700; color: darkorange;">Bunny:</b> <b style="color: blue;">(B)</b>
+                            Yes, the glowing orb is
+                            clipping through the
+                            counter.
+                            <span style="color: red;">✗</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="caption inline">
+                            <b style="font-weight: 700; color: purple;">LLaVA-1.6-34B:</b> <b
+                                style="color: blue;">(C)</b>
+                            Yes, the 'Additional
+                            Download' progress bar
+                            seems
+                            stuck. <span style="color: red;">✗</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr class="hard">
+
+        </div>
+
+        <div class="slide-content" style="display: none;">
+            <div class="image-container">
+                <img src="./static/images/sample-B.jpeg" alt="Placeholder 2">
+            </div>
+            <hr class="hard">
+            <div>
+                <div class="caption-1">
+                    <div>
+                        <p class="caption inline">
+                            <b style="font-weight: 700; color: darkblue;">Question:</b> <b>Based on the score and time
+                                remaining, which team is
+                                likely to win the match?</b>
+                        </p>
+                    </div>
+                </div>
+                <div class="caption-2">
+                    <div>
+                        <p class="caption inline">
+                            <b style="font-weight: 700;">VideoGameBunny:</b> <b style="color: blue;">(B)</b> The blue
+                            team is likely to win
+                            <span style="color: green;">✓</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="caption inline">
+                            <b style="font-weight: 700; color: darkorange;">Bunny:</b> <b style="color: blue;">(C)</b>
+                            The red team is likely to
+                            win. <span style="color: red;">✗</span>
+                        </p>
+                    </div>
+                    <div>
+                        <p class="caption inline">
+                            <b style="font-weight: 700900; color: purple;">LLaVA-1.6-34B:</b> <b
+                                style="color: blue;">(C)</b>
+                            The red team is likely to
+                            win. <span style="color: red;">✗</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr class="hard">
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container blog main ">
+        <h1 class="section">
+            Conclusion
+        </h1>
+
+        <p class="text">
+            We introduce a new instruction-following dataset, with 389,565 image-instruction pairs, specifically
+            designed for video
+            game understanding. We investigate the effectiveness of fine-tuning LMMs on different instruction-following
+            dataset
+            types and mixtures of them, and finally introduce <span class="videogamebunny">VideoGameBunny</span>, an
+            8B parameter model that outperforms a SOTA
+            model,
+            LLaVA-1.6-34B, on a game-related question answering benchmark. </p>
+
+    </div>
 
     <footer>
         <p>This website is using the template of <a href="https://shikun.io/projects/prismer">Prismer</a> by Shikun
@@ -264,6 +972,28 @@
                 textContainer.classList.remove('show');
                 void textContainer.offsetWidth; // Trigger reflow
                 textContainer.classList.add('show');
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const dots = document.querySelectorAll('.dot');
+            const slides = document.querySelectorAll('.slide-content');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides[currentSlide].style.display = 'none';
+                dots[currentSlide].classList.remove('active');
+
+                currentSlide = index;
+
+                slides[currentSlide].style.display = 'block';
+                dots[currentSlide].classList.add('active');
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => showSlide(index));
             });
         });
     </script>
