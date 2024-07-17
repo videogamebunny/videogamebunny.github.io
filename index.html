@@ -146,6 +146,92 @@
             max-height: 100%;
             object-fit: contain;
         }
+
+        pre {
+            background-color: #f4f4f4;
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9em;
+        }
+
+        .json-viewer {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            background-color: #f8f8f8;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 20px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .json-key {
+            color: #881391;
+        }
+
+        .json-string {
+            color: #1a1aa6;
+        }
+
+        .json-number {
+            color: #1c00cf;
+        }
+
+        .json-boolean {
+            color: #0000ff;
+        }
+
+        .json-null {
+            color: #808080;
+        }
+
+
+        .container.blog.main {
+            padding: 20px 0;
+            /* Reduce overall container padding */
+        }
+
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: auto;
+            /* Remove fixed height */
+            margin: 0;
+            /* Remove any margin */
+        }
+
+        .image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 95%;
+            /* Increase max-width */
+            margin: 10px auto;
+            /* Add small vertical margin */
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 70vh;
+            /* Limit height to 70% of viewport height */
+            object-fit: contain;
+            display: block;
+        }
+
+        .hard {
+            margin: 10px 0;
+            /* Reduce margin for horizontal rules */
+        }
     </style>
 </head>
 
@@ -839,6 +925,10 @@
             <ul class="dots" id="slide-menu">
                 <li class="dot active"></li>
                 <li class="dot"></li>
+                <li class="dot"></li>
+                <li class="dot"></li>
+                <li class="dot"></li>
+
             </ul>
         </div>
 
@@ -934,7 +1024,43 @@
             </div>
             <hr class="hard">
         </div>
+
+        <div class="slide-content" style="display: none;">
+            <div class="image-container">
+                <img src="./static/images/json/1.png" alt="sample-C">
+            </div>
+            <hr class="hard">
+            <div>
+                <h3>JSON Representation</h3>
+                <div id="json-viewer" class="json-viewer"></div>
+            </div>
+        </div>
+
+
+        <div class="slide-content" style="display: none;">
+            <div class="image-container">
+                <img src="./static/images/json/2.png" alt="sample-D">
+            </div>
+            <hr class="hard">
+            <div>
+                <h3>JSON Representation</h3>
+                <div id="json-viewer-D" class="json-viewer"></div>
+            </div>
+        </div>
+
+        <div class="slide-content" style="display: none;">
+            <div class="image-container">
+                <img src="./static/images/json/3.png" alt="sample-E">
+            </div>
+            <hr class="hard">
+            <div>
+                <h3>JSON Representation</h3>
+                <div id="json-viewer-E" class="json-viewer"></div>
+            </div>
+        </div>
+
     </div>
+
 
 
 
@@ -978,10 +1104,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            const textContainer = document.getElementById('annotation-text-container');
             const dots = document.querySelectorAll('.dot');
             const slides = document.querySelectorAll('.slide-content');
             let currentSlide = 0;
 
+            // Annotation point functionality
+            document.querySelectorAll('.annotation-point').forEach(point => {
+                point.addEventListener('click', function () {
+                    const text = this.getAttribute('data-text');
+                    textContainer.textContent = text;
+                    textContainer.classList.remove('show');
+                    void textContainer.offsetWidth; // Trigger reflow
+                    textContainer.classList.add('show');
+                });
+            });
+
+            // Slide functionality
             function showSlide(index) {
                 slides[currentSlide].style.display = 'none';
                 dots[currentSlide].classList.remove('active');
@@ -995,6 +1134,50 @@
             dots.forEach((dot, index) => {
                 dot.addEventListener('click', () => showSlide(index));
             });
+
+            // JSON formatting function
+            function formatJSON(obj, indent = 0) {
+                if (obj === null) return '<span class="json-null">null</span>';
+                if (typeof obj === 'boolean') return '<span class="json-boolean">' + obj + '</span>';
+                if (typeof obj === 'number') return '<span class="json-number">' + obj + '</span>';
+                if (typeof obj === 'string') return '<span class="json-string">"' + obj + '"</span>';
+                if (Array.isArray(obj)) {
+                    let result = '[\n';
+                    obj.forEach((item, index) => {
+                        result += '  '.repeat(indent + 1) + formatJSON(item, indent + 1);
+                        if (index < obj.length - 1) result += ',';
+                        result += '\n';
+                    });
+                    return result + '  '.repeat(indent) + ']';
+                }
+                if (typeof obj === 'object') {
+                    let result = '{\n';
+                    Object.keys(obj).forEach((key, index) => {
+                        result += '  '.repeat(indent + 1) + '<span class="json-key">"' + key + '"</span>: ' + formatJSON(obj[key], indent + 1);
+                        if (index < Object.keys(obj).length - 1) result += ',';
+                        result += '\n';
+                    });
+                    return result + '  '.repeat(indent) + '}';
+                }
+            }
+
+            // Function to fetch and render JSON
+            function fetchAndRenderJSON(jsonPath, elementId) {
+                fetch(jsonPath)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById(elementId).innerHTML = formatJSON(data);
+                    })
+                    .catch(error => {
+                        console.error('Error loading JSON:', error);
+                        document.getElementById(elementId).innerHTML = 'Error loading JSON data';
+                    });
+            }
+
+            // Render JSON for each viewer
+            fetchAndRenderJSON('./static/json_data/1.json', 'json-viewer');
+            fetchAndRenderJSON('./static/json_data/2.json', 'json-viewer-D');
+            fetchAndRenderJSON('./static/json_data/3.json', 'json-viewer-E');
         });
     </script>
 
