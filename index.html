@@ -17,6 +17,7 @@
     <title>VideoGameBunny: Towards vision assistants for video games</title>
     <link rel="stylesheet" href="./static/css/prismer.css">
     <link rel="stylesheet" href="./static/css/shikun.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -253,15 +254,21 @@
                     </p>
                     <div>
                         <a href="./static/paper/paper.pdf" class="button icon"
-                            style="background-color: rgba(39, 38, 42, 0.2)">Paper <i class="far fa-book-open"></i></a>
+                            style="background-color: rgba(39, 38, 42, 0.2)">
+                            <i class="fas fa-file-pdf"></i> Paper
+                        </a>
                         <a href="https://huggingface.co/datasets/VideoGameBunny/Dataset" class="button icon"
-                            style="background-color: rgba(39, 38, 42, 0.2)">Dataset <i class="far fa-code"></i></a>
+                            style="background-color: rgba(39, 38, 42, 0.2)">
+                            <i class="fas fa-database"></i> Dataset
+                        </a>
                         <a href="https://huggingface.co/VideoGameBunny/VideoGameBunny-V1" class="button icon"
-                            style="background-color: rgba(39, 38, 42, 0.2)">Model <i
-                                class="fa-light fa-face-smiling-hands"></i></a>
+                            style="background-color: rgba(39, 38, 42, 0.2)">
+                            <i class="fas fa-microchip"></i> Model (8B)
+                        </a>
                         <a href="https://huggingface.co/VideoGameBunny/VideoGameBunny-V1-4B" class="button icon"
-                                style="background-color: rgba(39, 38, 42, 0.2)">Model 4B<i
-                                class="fa-light fa-face-smiling-hands"></i></a>
+                            style="background-color: rgba(39, 38, 42, 0.2)">
+                            <i class="fas fa-microchip"></i> Model (4B)
+                        </a>
                     </div>
                 </div>
                 <div class="info">
@@ -931,7 +938,9 @@
                 <li class="dot"></li>
                 <li class="dot"></li>
                 <li class="dot"></li>
-
+                <li class="dot"></li>
+                <li class="dot"></li>
+                <li class="dot"></li>
             </ul>
         </div>
 
@@ -1062,6 +1071,43 @@
             </div>
         </div>
 
+
+        <div class="slide-content" style="display: none;">
+            <div class="image-container">
+                <img src="./static/images/json/4.png" alt="sample-E">
+            </div>
+            <hr class="hard">
+            <div>
+                <h3>JSON Representation</h3>
+                <div id="json-viewer-F" class="json-viewer"></div>
+            </div>
+        </div>
+
+
+        <div class="slide-content" style="display: none;">
+            <div class="image-container">
+                <img src="./static/images/json/5.png" alt="sample-E">
+            </div>
+            <hr class="hard">
+            <div>
+                <h3>JSON Representation</h3>
+                <div id="json-viewer-G" class="json-viewer"></div>
+            </div>
+        </div>
+
+
+
+        <div class="slide-content" style="display: none;">
+            <div class="image-container">
+                <img src="./static/images/json/6.png" alt="sample-E">
+            </div>
+            <hr class="hard">
+            <div>
+                <h3>JSON Representation</h3>
+                <div id="json-viewer-H" class="json-viewer"></div>
+            </div>
+        </div>
+
     </div>
 
 
@@ -1181,6 +1227,9 @@
             fetchAndRenderJSON('./static/json_data/1.json', 'json-viewer');
             fetchAndRenderJSON('./static/json_data/2.json', 'json-viewer-D');
             fetchAndRenderJSON('./static/json_data/3.json', 'json-viewer-E');
+            fetchAndRenderJSON('./static/json_data/4.json', 'json-viewer-F');
+            fetchAndRenderJSON('./static/json_data/5.json', 'json-viewer-G');
+            fetchAndRenderJSON('./static/json_data/6.json', 'json-viewer-H');
         });
     </script>
 
